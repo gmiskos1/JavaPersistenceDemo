@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.javapersistence</groupId>
+  <artifactId>javapersistence</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0</version>
+  <name>Java Persistence API :: java-persistence-api-22-m1 :: Module1</name>
+
+  <properties>
+    <version.java>1.8</version.java>
+    <!-- JPA -->
+    <version.eclipselink>2.7.3</version.eclipselink>
+    <version.h2>1.4.197</version.h2>
+    <!-- Test -->
+    <version.junit>4.12</version.junit>
+    <!-- Maven Plugins -->
+    <version.maven.jar.plugin>3.0.2</version.maven.jar.plugin>
+    <version.maven.war.plugin>3.2.0</version.maven.war.plugin>
+    <version.maven.compiler.plugin>3.7.0</version.maven.compiler.plugin>
+    <version.maven.dependency.plugin>3.0.2</version.maven.dependency.plugin>
+    <version.maven.help.plugin>2.2</version.maven.help.plugin>
+    <version.maven.surefire.plugin>2.22.1</version.maven.surefire.plugin>
+    <version.maven.javadoc.plugin>3.0.0</version.maven.javadoc.plugin>
+    <version.maven.exec.plugin>1.6.0</version.maven.exec.plugin>
+    <version.maven.assembly.plugin>3.1.0</version.maven.assembly.plugin>
+    <!-- Project -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <dependencies>
+    <!-- JPA -->
+    <dependency>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>org.eclipse.persistence.jpa</artifactId>
+      <version>${version.eclipselink}</version>
+    </dependency>
+    <!-- Database -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>${version.h2}</version>
+    </dependency>
+    <!-- Test -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${version.junit}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Apache -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${version.maven.surefire.plugin}</version>
+        <configuration>
+          <argLine>-Duser.language=en -Duser.country=EN</argLine>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-help-plugin</artifactId>
+        <version>${version.maven.help.plugin}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${version.maven.compiler.plugin}</version>
+        <inherited>true</inherited>
+        <configuration>
+          <source>7</source>
+          <target>7</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${version.maven.jar.plugin}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${version.maven.javadoc.plugin}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>${version.maven.dependency.plugin}</version>
+      </plugin>
+
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>${version.maven.assembly.plugin}</version>
+        <configuration>
+          <finalName>demos</finalName>
+          <appendAssemblyId>false</appendAssemblyId>
+          <descriptors>
+            <descriptor>assembly.xml</descriptor>
+          </descriptors>
+        </configuration>
+      </plugin>     
+
+      <plugin>
+        <groupId>se.natusoft.tools.doc.markdowndoc</groupId>
+        <artifactId>markdowndoc-maven-plugin</artifactId>
+        <version>2.1.0</version>
+        <executions>
+          <execution>
+            <id>generate-docs</id>
+            <goals>
+              <goal>doc</goal>
+            </goals>
+            <phase>install</phase>
+          </execution>
+        </executions>
+        <configuration>
+          <generatorOptions>
+            <generator>pdf</generator>
+            <inputPaths>java-persistence-api-22-m1/transcript01.md</inputPaths>
+          </generatorOptions>
+          <pdfGeneratorOptions>
+            <resultFile>java-persistence-api-22-m1/transcript01.pdf</resultFile>
+          </pdfGeneratorOptions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+        <id>com.springsource.repository.bundles.release</id>
+        <name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+        <url>http://repository.springsource.com/maven/bundles/release</url>
+    </repository>
+    <repository>
+        <id>com.springsource.repository.bundles.external</id>
+        <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+        <url>http://repository.springsource.com/maven/bundles/external</url>
+    </repository>
+
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>bintray-plugins</name>
+      <url>http://jcenter.bintray.com/</url>
+    </pluginRepository>
+  </pluginRepositories>
+</project>
